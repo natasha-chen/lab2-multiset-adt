@@ -56,7 +56,7 @@ public class BST {
     }
 
     private void deleteRoot() {
-
+        root = null;
     }
 
 
