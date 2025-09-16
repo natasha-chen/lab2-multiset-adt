@@ -56,7 +56,6 @@ public class BST {
             this.left.insert(item);
         }
         else this.right.insert(item);
-
     }
 
 
