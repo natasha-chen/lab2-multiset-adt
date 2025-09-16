@@ -56,7 +56,23 @@ public class BST {
     }
 
     private void deleteRoot() {
-        root = null;
+        if (left.isEmpty() && right.isEmpty()) {
+            root = null;
+            left = null;
+            right = null;
+        } else if (left.isEmpty()) {
+            // Promote right subtree
+            root = right.root;
+            left = right.left;
+            right = right.right;
+        } else if (right.isEmpty()) {
+            // Promote left subtree
+            root = left.root;
+            right = left.right;
+            left = left.left;
+        } else {
+            root = left.extractMax();
+        }
     }
 
 
