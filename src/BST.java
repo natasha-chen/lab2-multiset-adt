@@ -29,7 +29,7 @@ public class BST {
 
 
     public boolean isEmpty() {
-        return false; // TODO implement me!
+        return this.root == null;
     }
 
     public boolean contains(int item) {
@@ -47,21 +47,63 @@ public class BST {
 
 
     public void insert(int item) {
-
+        if (this.isEmpty()) {
+            this.root = item;
+            this.left = new BST();
+            this.right = new BST();
+        }
+        else if (item <= this.root) {
+            this.left.insert(item);
+        }
+        else this.right.insert(item);
     }
 
 
     public void delete(int item) {
-
+        if (this.isEmpty()) {  // empty block to mirror python code
+        } else if (this.root == item) {
+            this.deleteRoot();
+        } else if (item < this.root) {
+            this.left.delete(item);
+        } else {
+            this.right.delete(item);
+        }
     }
 
     private void deleteRoot() {
-
+        if (left.isEmpty() && right.isEmpty()) {
+            root = null;
+            left = null;
+            right = null;
+        } else if (left.isEmpty()) {
+            // Promote right subtree
+            root = right.root;
+            left = right.left;
+            right = right.right;
+        } else if (right.isEmpty()) {
+            // Promote left subtree
+            root = left.root;
+            right = left.right;
+            left = left.left;
+        } else {
+            root = left.extractMax();
+        }
     }
 
 
     private int extractMax() {
-        return -1;
+        if (right.isEmpty()) {
+            int max = root;
+            if (left != null) {
+                root = left.root;
+                right = left.right;
+                left = left.left;
+            } else {
+                root = null;
+            }
+            return max;
+        }
+        return right.extractMax();
     }
 
     public int height() {
