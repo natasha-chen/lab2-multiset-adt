@@ -114,7 +114,7 @@ public class BST {
         if  (this.isEmpty()) {
             return 0;
         }
-        else if (item > this.root) {
+        else if (this.root > item) {
             return this.left.count(item);
         }
         else if (item == this.root) {
